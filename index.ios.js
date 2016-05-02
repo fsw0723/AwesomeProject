@@ -4,7 +4,8 @@ import React, {
   StyleSheet,
   Text,
   View,
-  Navigator
+  Navigator,
+  StatusBarIOS
 } from 'react-native';
 
 import SimpleButton from './App/Components/SimpleButton';
@@ -19,6 +20,8 @@ var NavigationBarRouteMapper = {
           <SimpleButton
             onPress={() => navigator.pop()}
             customText='Back'
+            style={styles.navBarLeftButton}
+            textStyle={styles.navBarButtonText}
            />
         );
       default:
@@ -36,6 +39,8 @@ var NavigationBarRouteMapper = {
                 name: 'createNote'
               });
             }}
+            style={styles.navBarRightButton}
+            textStyle={styles.navBarButtonText}
             customText='Create Note'
           />
         );
@@ -48,17 +53,21 @@ var NavigationBarRouteMapper = {
     switch (route.name) {
       case 'home':
         return (
-          <Text>React Notes</Text>
+          <Text style={styles.navBarTitleText}>React Notes</Text>
         );
       case 'createNote':
         return (
-          <Text>Create Note</Text>
+          <Text style={styles.navBarTitleText}>Create Note</Text>
         );
     }
   }
 };
 
 class AwesomeProject extends Component {
+  constructor (props) {
+    super(props);
+    StatusBarIOS.setStyle('light-content');
+  }
   renderScene (route, navigator) {
      switch (route.name) {
        case 'home':
@@ -80,11 +89,39 @@ class AwesomeProject extends Component {
         navigationBar={
           <Navigator.NavigationBar
             routeMapper={NavigationBarRouteMapper}
+            style={styles.navBar}
           />
         }
       />
     );
   }
 }
+
+var styles = StyleSheet.create({
+    navBar: {
+      backgroundColor: '#5B29C1',
+      borderBottomColor: '#48209A',
+      borderBottomWidth: 1
+    },
+    navBarTitleText: {
+      color: 'white',
+      fontSize: 16,
+      fontWeight: '500',
+      marginVertical: 9  // iOS
+   // marginVertical: 16 // Android
+    },
+    navBarLeftButton: {
+      paddingLeft: 10
+    },
+    navBarRightButton: {
+      paddingRight: 10
+    },
+    navBarButtonText: {
+      color: '#EEE',
+      fontSize: 16,
+      marginVertical: 10 // iOS
+   // marginVertical: 16 // Android
+    }
+});
 
 AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
