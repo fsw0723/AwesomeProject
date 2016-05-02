@@ -8,8 +8,9 @@ export default class SimpleButton extends React.Component {
   render () {
     return (
       <TouchableOpacity onPress={this.props.onPress}>
-        <View>
-          <Text>{this.props.customText || 'Simple Button'}</Text>
+        <View style={this.props.style}>
+          <Text style={this.props.textStyle}>{this.props.customText || 'Simple Button'}
+          </Text>
         </View>
       </TouchableOpacity>
     );
@@ -17,6 +18,8 @@ export default class SimpleButton extends React.Component {
 }
 
 SimpleButton.propTypes = {
-  onPress: React.PropTypes.func.isRequired,
-  customText: React.PropTypes.string
+    onPress: React.PropTypes.func.isRequired,
+    customText: React.PropTypes.string,
+    style: View.propTypes.style,
+    textStyle: Text.propTypes.style
 };
