@@ -12,6 +12,8 @@ import React, {
   View
 } from 'react-native';
 
+import SimpleButton from './App/Components/SimpleButton';
+
 class AwesomeProject extends Component {
   render() {
     return (
@@ -27,6 +29,7 @@ class AwesomeProject extends Component {
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
+        <SimpleButton />
       </View>
     );
   }
